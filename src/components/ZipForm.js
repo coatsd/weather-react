@@ -7,6 +7,7 @@ class ZipForm extends Component {
             zipcode: ''
         };
         this.inputUpdated = this.inputUpdated.bind(this);
+        this.submitZipCode = this.submitZipCode.bind(this);
     }
 
     inputUpdated(e) {
@@ -14,12 +15,8 @@ class ZipForm extends Component {
         this.setState({zipcode: value});
     }
 
-    onFormSubmit(zipcode) {
-        this.setState({zipcode});
-    }
-
-    submitZipCode (e) {
-        e.preventDefault(); // don’t submit the form
+    submitZipCode(event) {
+        event.preventDefault(); // don’t submit the form
         const { zipcode } = this.state; // get the zipcode from the state
         const { onSubmit } = this.props; // the method from the App
         onSubmit(zipcode); // the form calls a method on the App and passes the zipcode
@@ -29,11 +26,11 @@ class ZipForm extends Component {
     render() {
         return (
             <div className="zip-form">
-                <form id="zipform" onSumbit={this.submitZipCode}>
+                <form id="zipform" onSubmit={this.submitZipCode}>
                     <div className="flex-parent">
                         <label htmlFor="zipcode">Zip</label>
                         <input onInput={this.inputUpdated} className="form-control" type="input"
-                            id="zipcode" name="zipcode" value="" required />
+                            id="zipcode" name="zipcode" required />
                     </div>
                 </form>
             </div> 
